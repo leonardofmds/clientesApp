@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
+import { formataDataParaDDMMYYYY } from '../../functions/functions';
 
 
 @Component({
@@ -41,9 +42,14 @@ export class CadastroClientesComponent {
       enderecos: [this.form.value.endereco]
     };
 
+    cliente.dataNascimento = formataDataParaDDMMYYYY(cliente.dataNascimento);
+
     this.service.cadastrar(cliente).subscribe({
       next: () => this.router.navigate(['/']),
       error: err => alert('Erro ao cadastrar cliente: ' + err.message)
     });
   }
+
+  get f() { return this.form.controls; }
+  get e() { return (this.form.get('endereco') as FormGroup).controls; }
 }

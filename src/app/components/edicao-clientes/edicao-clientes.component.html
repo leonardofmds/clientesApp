@@ -2,47 +2,83 @@
   <div class="col-md-6">
     <label class="form-label">Nome</label>
     <input type="text" class="form-control" formControlName="nome">
+    <span class="text-danger" *ngIf="f['nome'].touched && f['nome'].errors">
+      <small *ngIf="f['nome'].errors['required']">Nome é obrigatório.</small>
+      <small *ngIf="f['nome'].errors['minlength']">Mínimo 8 caracteres.</small>
+      <small *ngIf="f['nome'].errors['maxlength']">Máximo 100 caracteres.</small>
+    </span>
   </div>
   <div class="col-md-6">
     <label class="form-label">Email</label>
     <input type="email" class="form-control" formControlName="email">
+    <span class="text-danger" *ngIf="f['email'].touched && f['email'].errors">
+      <small *ngIf="f['email'].errors['required']">Email é obrigatório.</small>
+      <small *ngIf="f['email'].errors['email']">Formato inválido.</small>
+    </span>
   </div>
   <div class="col-md-4">
     <label class="form-label">CPF</label>
     <input type="text" class="form-control" formControlName="cpf">
+    <span class="text-danger" *ngIf="f['cpf'].touched && f['cpf'].errors">
+      <small *ngIf="f['cpf'].errors['required']">CPF é obrigatório.</small>
+      <small *ngIf="f['cpf'].errors['pattern']">Deve conter 11 dígitos numéricos.</small>
+    </span>
   </div>
   <div class="col-md-4">
     <label class="form-label">Data de Nascimento</label>
     <input type="date" class="form-control" formControlName="dataNascimento">
+    <span class="text-danger" *ngIf="f['dataNascimento'].touched && f['dataNascimento'].errors">
+      <small>Data de nascimento é obrigatória.</small>
+    </span>
   </div>
 
-  <div class="col-md-6">
-    <label class="form-label">Logradouro</label>
-    <input type="text" class="form-control" formControlName="logradouro" formGroupName="endereco">
-  </div>
-  <div class="col-md-3">
-    <label class="form-label">Número</label>
-    <input type="text" class="form-control" formControlName="numero" formGroupName="endereco">
-  </div>
-  <div class="col-md-3">
-    <label class="form-label">Complemento</label>
-    <input type="text" class="form-control" formControlName="complemento" formGroupName="endereco">
-  </div>
-  <div class="col-md-4">
-    <label class="form-label">Bairro</label>
-    <input type="text" class="form-control" formControlName="bairro" formGroupName="endereco">
-  </div>
-  <div class="col-md-4">
-    <label class="form-label">Cidade</label>
-    <input type="text" class="form-control" formControlName="cidade" formGroupName="endereco">
-  </div>
-  <div class="col-md-2">
-    <label class="form-label">UF</label>
-    <input type="text" class="form-control" formControlName="uf" formGroupName="endereco">
-  </div>
-  <div class="col-md-2">
-    <label class="form-label">CEP</label>
-    <input type="text" class="form-control" formControlName="cep" formGroupName="endereco">
+  <div formGroupName="endereco">
+    <div class="col-md-6">
+      <label class="form-label">Logradouro</label>
+      <input type="text" class="form-control" formControlName="logradouro">
+      <span class="text-danger" *ngIf="e['logradouro'].touched && e['logradouro'].errors">
+        <small>Logradouro é obrigatório.</small>
+      </span>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Número</label>
+      <input type="text" class="form-control" formControlName="numero">
+      <span class="text-danger" *ngIf="e['numero'].touched && e['numero'].errors">
+        <small>Número é obrigatório.</small>
+      </span>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Complemento</label>
+      <input type="text" class="form-control" formControlName="complemento">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Bairro</label>
+      <input type="text" class="form-control" formControlName="bairro">
+      <span class="text-danger" *ngIf="e['bairro'].touched && e['bairro'].errors">
+        <small>Bairro é obrigatório.</small>
+      </span>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Cidade</label>
+      <input type="text" class="form-control" formControlName="cidade">
+      <span class="text-danger" *ngIf="e['cidade'].touched && e['cidade'].errors">
+        <small>Cidade é obrigatória.</small>
+      </span>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">UF</label>
+      <input type="text" class="form-control" formControlName="uf">
+      <span class="text-danger" *ngIf="e['uf'].touched && e['uf'].errors">
+        <small>UF é obrigatório.</small>
+      </span>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">CEP</label>
+      <input type="text" class="form-control" formControlName="cep">
+      <span class="text-danger" *ngIf="e['cep'].touched && e['cep'].errors">
+        <small>CEP é obrigatório.</small>
+      </span>
+    </div>
   </div>
 
   <div class="col-12">

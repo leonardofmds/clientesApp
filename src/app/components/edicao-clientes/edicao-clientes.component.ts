@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
+import { formataDataParaDDMMYYYY, formataDataParaISO } from '../../functions/functions';
 
 
 @Component({
@@ -50,7 +51,7 @@ export class EdicaoClientesComponent implements OnInit {
           nome: cliente.nome,
           email: cliente.email,
           cpf: cliente.cpf,
-          dataNascimento: cliente.dataNascimento,
+          dataNascimento: formataDataParaISO(cliente.dataNascimento),
           endereco: cliente.enderecos[0] || {}
         });
       });
@@ -65,9 +66,14 @@ export class EdicaoClientesComponent implements OnInit {
       enderecos: [this.form.value.endereco]
     };
 
+    cliente.dataNascimento = formataDataParaDDMMYYYY(cliente.dataNascimento);
+
     this.service.atualizar(cliente).subscribe({
       next: () => this.router.navigate(['/']),
       error: err => alert('Erro ao atualizar cliente: ' + err.message)
     });
   }
+
+  get f() { return this.form.controls; }
+  get e() { return (this.form.get('endereco') as FormGroup).controls; }
 }
