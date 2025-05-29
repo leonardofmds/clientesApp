@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Clientes</h2>
+  <a routerLink="/cadastro" class="btn btn-primary">Novo Cliente</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>CPF</th>
+      <th>Data de Nascimento</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clientes">
+      <td>{{ cliente.nome }}</td>
+      <td>{{ cliente.email }}</td>
+      <td>{{ cliente.cpf }}</td>
+      <td>{{ cliente.dataNascimento }}</td>
+      <td>
+        <a [routerLink]="['/edicao', cliente.id]" class="btn btn-sm btn-warning me-2">Editar</a>
+        <button (click)="excluirCliente(cliente.id!)" class="btn btn-sm btn-danger">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
